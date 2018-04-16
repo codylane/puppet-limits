@@ -1,0 +1,11 @@
+## files
+.DS_Store
+provisioned
+log
+Gemfile.lock
+
+## directories
+.bundle/
+spec/fixtures/manifests
+spec/fixtures/modules
+.vagrant/

@@ -1,0 +1,28 @@
+sudo: required
+dist: trusty
+language: ruby
+cache: bundler
+addons:
+  apt:
+    sources:
+      - augeas
+    packages:
+      - libaugeas-dev
+
+before_install:
+  - rm -f Gemfile.lock
+  - rm -rf .bundle/
+
+install:
+  - ./.travis/install.sh
+  - bundle config
+  - ruby -v
+
+matrix:
+  fast_finish: true
+  include:
+  - rvm: 2.4.3
+    env: BUNDLE_PATH=".bundle/gems" CHECK="spec"
+
+script:
+  - CHECK=${CHECK} ./.travis/script.sh

@@ -1,0 +1,42 @@
+{
+  "name": "puppet-limits",
+  "version": "1.0.0",
+  "author": "Cody Lane",
+  "summary": "A module for managing security limits in pam",
+  "license": "Apache-2.0",
+  "source": "https://github.com/codylane/puppet-limits",
+  "project_page": "https://github.com/codylane/puppet-limits",
+  "issues_url": "https://github.com/codylane/puppet-limits",
+  "dependencies": [
+    {
+      "name": "puppetlabs-stdlib",
+      "version_requirement": ">= 4.13.0 < 5.0.0"
+    }
+  ],
+  "data_provider": null,
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "5",
+        "6",
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [
+        "5",
+        "6",
+        "7"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 3.7.0 < 6.0.0"
+    }
+  ]
+}
+
