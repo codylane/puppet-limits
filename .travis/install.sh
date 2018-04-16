@@ -5,5 +5,5 @@ if [ -d "${HOME}/.rbenv" ]; then
   eval "$(rbenv init -)"
 fi
 
-bundle install --path .bundle/gems --verbose
-bundle show
+gem update --system
+bundle install --retry 5 --path .bundle/gems
