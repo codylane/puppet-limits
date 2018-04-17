@@ -3,7 +3,7 @@
 rm -f Gemfile.lock
 rm -rf .bundle/
 
-if [ -d ~/.rbenv ]; then
+if [ ! -d ~/.rbenv ]; then
   git clone https://github.com/rbenv/rbenv.git ~/.rbenv
   cd ~/.rbenv && src/configure && make -C src
 
