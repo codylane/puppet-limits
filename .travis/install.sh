@@ -8,7 +8,7 @@ fi
 
 ruby -v
 gem --version
-bundler --version
+bundle --version
 rake --version
 gem env
 
