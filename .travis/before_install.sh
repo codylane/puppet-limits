@@ -7,6 +7,12 @@ update_shell_profile() {
 
 SHELL_PROFILE="${HOME}/.bashrc"
 
+if [ -f "${HOME}/.bashrc" ]; then
+  SHELL_PROFILE="${HOME}/.bashrc"
+elif [ -f "${HOME}/.bash_profile" ]; then
+  SHELL_PROFILE="${HOME}/.bash_profile"
+fi
+
 rm -f Gemfile.lock
 rm -rf .bundle/
 
@@ -17,13 +23,7 @@ if [ ! -d ${RBENV_ROOT} ]; then
   cd ${RBENV_ROOT} && src/configure && make -C src
 fi
 
-if [ -f "${HOME}/.bashrc" ]; then
-  SHELL_PROFILE="${HOME}/.bashrc"
-elif [ -f "${HOME}/.bash_profile" ]; then
-  SHELL_PROFILE="${HOME}/.bash_profile"
-fi
-
-echo $PATH | grep -q '/.rbenv/bin' || update_shell_profile
+type -P rbenv >>/dev/null 2>&1 || update_shell_profile
 
 . ${SHELL_PROFILE}
 
