@@ -1,31 +1,31 @@
-#!/bin/bash -xe
+#!/bin/bash -e
+
+update_shell_profile() {
+  echo 'export PATH="${RBENV_ROOT}/bin:$PATH"' >> ${SHELL_PROFILE}
+  echo 'eval "$(rbenv init -)"' >> ${SHELL_PROFILE}
+}
+
+SHELL_PROFILE="${HOME}/.bashrc"
 
 rm -f Gemfile.lock
 rm -rf .bundle/
 
 export RBENV_ROOT="${HOME}/.rbenv"
 
-SHELL_PROFILE="${HOME}/.bashrc"
-
 if [ ! -d ${RBENV_ROOT} ]; then
   git clone https://github.com/rbenv/rbenv.git ${RBENV_ROOT}
   cd ${RBENV_ROOT} && src/configure && make -C src
-
-  if [ -f "${HOME}/.bashrc" ]; then
-    SHELL_PROFILE="${HOME}/.bashrc"
-
-    echo 'export PATH="${RBENV_ROOT}/bin:$PATH"' >> ${SHELL_PROFILE}
-    echo 'eval "$(rbenv init -)"' >> ${SHELL_PROFILE}
-  elif [ -f "${HOME}/.bash_profile" ]; then
-    SHELL_PROFILE="${HOME}/.bash_profile"
-
-    echo 'export PATH="${RBENV_ROOT}/bin:$PATH"' >> ${SHELL_PROFILE}
-    echo 'eval "$(rbenv init -)"' >> ${SHELL_PROFILE}
-  fi
-
 fi
 
-[ -f ${SHELL_PROFILE} ] && . ${SHELL_PROFILE} || . ${HOME}/.bash_profile
+if [ -f "${HOME}/.bashrc" ]; then
+  SHELL_PROFILE="${HOME}/.bashrc"
+elif [ -f "${HOME}/.bash_profile" ]; then
+  SHELL_PROFILE="${HOME}/.bash_profile"
+fi
+
+echo $PATH | grep -q '/.rbenv/bin' || update_shell_profile
+
+. ${SHELL_PROFILE}
 
 mkdir -p ${RBENV_ROOT}/plugins
 [ -d "${RBENV_ROOT}/plugins/ruby-build" ] || git clone https://github.com/rbenv/ruby-build.git ${RBENV_ROOT}/plugins/ruby-build
