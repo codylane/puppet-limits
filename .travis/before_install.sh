@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash -xe
 
 update_shell_profile() {
   echo 'export PATH="${RBENV_ROOT}/bin:$PATH"' >> ${SHELL_PROFILE}
@@ -25,6 +25,9 @@ fi
 
 type -P rbenv >>/dev/null 2>&1 || update_shell_profile
 
+# adding the export incase this never gets to the profile.
+export PATH="${RBENV_ROOT}/bin:${PATH}"
+eval "$(rbenv init -)"
 . ${SHELL_PROFILE}
 
 mkdir -p ${RBENV_ROOT}/plugins
