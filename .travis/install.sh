@@ -6,5 +6,11 @@ if [ -d "${HOME}/.rbenv" ]; then
   rbenv rehash
 fi
 
+ruby -v
+gem --version
+bundler --version
+rake --version
+gem env
+
 bundle install --retry 5 --path .bundle/gems
 rbenv rehash
